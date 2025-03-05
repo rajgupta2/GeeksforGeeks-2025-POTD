@@ -1,47 +1,26 @@
 /*
-Longest String Chain
-You are given an array of words where each word consists of lowercase English letters.
-wordA is a predecessor of wordB if and only if we can insert exactly one letter anywhere in wordA without changing the order of the other characters to make it equal to wordB. For example, "abc" is a predecessor of "abac", while "cba" is not a predecessor of "bcad".
+Longest Increasing Subsequence
+Given an array arr[] of non-negative integers, the task is to find the length of the Longest Strictly Increasing Subsequence (LIS).
 
-A word chain is a sequence of words [word1, word2, ..., wordk] with k >= 1, where word1 is a predecessor of word2, word2 is a predecessor of word3, and so on. A single word is trivially a word chain with k = 1.
-
-Return the length of the longest possible word chain with words chosen from the given list of words in any order.
-*/
+A subsequence is strictly increasing if each element in the subsequence is strictly less than the next element.*/
 class Solution {
     public:
-  bool static cmp(const string& a, const string& b) {
-      return a.size() < b.size();
-  }
+      int lis(vector<int>& arr) {
+          // code here
+          int n = arr.size();
+      vector<int> lis(n, 1);
 
-  // Function to find the length of the longest string chain
-  int longestStringChain(vector<string>& words) {
-
-      // Sort the words by length
-      sort(words.begin(), words.end(), cmp);
-
-      // Create an unordered map to store the
-      // maximum chain length for each word
-      unordered_map<string, int> dp;
-
-      int res = 1;
-
-      // Iterate through each word in the sorted list of words
-      for (const string& w : words) {
-
-          dp[w] = 1; // Initialize length for the current word
-
-          // Try removing one character at a time to
-         // check if it forms a valid predecessor
-          for (int i = 0; i < w.size(); ++i) {
-              string pred = w.substr(0, i) + w.substr(i + 1);
-              if (dp.find(pred) != dp.end()) {
-                  dp[w] = max(dp[w], dp[pred] + 1);
+      // Compute optimized LIS values in
+      // bottom-up manner
+      for (int i = 1; i < n; i++) {
+          for (int prev = 0; prev < i; prev++) {
+              if (arr[i] > arr[prev] && lis[i] < lis[prev] + 1) {
+                  lis[i] = lis[prev] + 1;
               }
           }
-
-          res = max(res, dp[w]);
       }
 
-      return res;
-  }
+      // Return maximum value in lis
+      return *max_element(lis.begin(), lis.end());
+      }
   };
