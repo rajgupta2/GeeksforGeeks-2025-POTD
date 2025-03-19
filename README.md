@@ -40,9 +40,7 @@ Feel free to contribute by submitting pull requests for alternate solutions, opt
 ## 📜 License
 This repository is licensed under the [MIT License](LICENSE).
 
----
-
-### 📢 Stay Connected
+## 📢 Stay Connected  
 - 🌟 Star this repository if you find it useful!
 - 🔗 Share with your fellow programmers!
 - 📩 Feel free to reach out for discussions or improvements!
